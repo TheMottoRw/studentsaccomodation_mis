@@ -12,7 +12,7 @@
             <div class="col-md-3">
             </div>
             <div class="col-md-6 jumbotron">
-                <form action="/index.php/helper/login" method="POST">
+                <form action="<?= base_url().'index.php/helper/login';?>" method="POST">
                     <h3>Student Accomodation - Login to continue </h3>
                     <span id="regUserResponse"> </span><br>
                     <label>Phone</label>
