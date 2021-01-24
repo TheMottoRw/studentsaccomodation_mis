@@ -6,8 +6,11 @@ class Outside extends CI_Controller{
     }
     public function register(){
         $feed = $this->outside->save();
-        if($feed!=0) header("location:../v/declaration");
-        else echo "Failed to save declaration of your accomodation";
+
+		if($feed=="student not exist") $this->session->set_flashdata("response","<div class='alert alert-danger'>Student not exist</div>");
+		elseif($feed!=0) $this->session->set_flashdata("response","<div class='alert alert-success'>Your accomodation declaration registered successful</div>");
+		else $this->session->set_flashdata("response","<div class='alert alert-danger'>Failed to save declaration of your accomodation</div>");
+		header("location:../v/declaration");
     }
     public function load(){
         $this->output->set_content_type('application/json');
@@ -17,8 +20,12 @@ class Outside extends CI_Controller{
 
     public function update($id){
         $feed = $this->outside->update($id);
-        echo $feed;
-    }
+
+		if($feed!=0) $this->session->set_flashdata("response","<div class='alert alert-success'>Your declaration updated successful</div>");
+		else $this->session->set_flashdata("response","<div class='alert alert-danger'>Failed to update declaration of your accomodation</div>");
+		header("location:../v/declaration");
+
+	}
 
     public function delete($id){
         $feed = $this->outside->delete($id);

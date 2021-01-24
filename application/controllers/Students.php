@@ -29,7 +29,7 @@ class Students extends CI_Controller{
 
     public function delete($id){
         $feed = $this->student->delete($id);
-        if($studId!=1) header("location:../../v/students");
+        if($feed!=1) header("location:../../v/students");
         else echo "Failed to delete student";
     }
 }

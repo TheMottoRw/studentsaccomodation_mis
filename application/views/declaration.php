@@ -12,6 +12,8 @@
         <div class="row">
             <div class="col-md-12" >
                 <h3>Declared home <button class='btn btn-primary btn-lg pull-right' data-toggle='modal' data-target='#homeDeclaration'> Make declaration </button></h3>
+
+				<?= $this->session->flashdata("response"); ?>
                 <table class="table table-bordered">
                     <thead>
                         <th>#Count</th>

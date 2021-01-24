@@ -20,14 +20,17 @@ class AccomodatedIncollege_model extends CI_Model{
         else $student_id = $studentInfo[0]['id'];
         //get room available
         $totalHost = $this->rooms->getBy('id',$roomid)[0]['host'];
-        if($totalHost <= $this->bedReserved($roomid,$academic_year)) return 'No bed available for selected room';
+        if($totalHost <= $this->bedReserved($roomid,$academic_year)) {
+			$this->session->set_flashdata("response","<div class='alert alert-danger'>No bed available for selected room</div>");
+			return 0;
+		}
 
         $sql = "INSERT INTO accomodated_incollege SET room_id=?,student_id=?,academic_year=?,level_class=?";
         $query = $this->db->query($sql,array($roomid,$student_id,$academic_year,$level_class));
         return $this->db->insert_id();
     }
     function get_data(){
-        // $query = $this->db->get('accomodated_incollege',50);
+        // $query = $this->db->get("accomodated_incollege',50);
         $query = $this->db->query('select acin.*,s.phone,s.names as student,s.regno,r.names as room from accomodated_incollege acin inner join students s on s.id=acin.student_id inner join rooms r on r.id=acin.room_id limit 50');
         return $query->result_array();
     }

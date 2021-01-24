@@ -11,6 +11,7 @@ class AccomodatedOutside_model extends CI_Model{
         $student_id = 0;
         $studRegno = $this->input->post('regno');
         $studentInfo = $this->stud->getBy('regno',$studRegno);
+//        echo json_encode($studentInfo);exit;
 
         if(count($studentInfo) == 0) return 'student not exist';
         else $student_id = $studentInfo[0]['id'];

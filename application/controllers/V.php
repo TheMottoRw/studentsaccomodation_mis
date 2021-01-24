@@ -37,7 +37,7 @@ class V extends CI_Controller{
     public function reservation(){
         $this->load->view('includes/header',array('title'=>'index'));
         $this->load->view('menu_adheader');
-        $this->load->view('reservation',array('title'=>'Accomodation reservation','data'=>$this->incollege->get_data()));
+        $this->load->view('reservation',array('title'=>'Accomodation reservation','data'=>$this->incollege->get_data(),'rooms'=>$this->rooms->get_data()));
         $this->load->view('includes/footer');
     }
 }

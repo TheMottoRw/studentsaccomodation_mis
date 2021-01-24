@@ -15,6 +15,15 @@ class Students_model extends CI_Model{
         return $query->result_array();
     }
 
+	function studentLogin(){
+		// echo base64_encode('12345');exit;
+		$phone = $this->input->post('phone');
+		$password = $this->input->post('password');
+		$sql = "SELECT * FROM students WHERE (phone=? OR regno=?) and password=?";
+		$query = $this->db->query($sql,array($phone,$phone,base64_encode($password)));
+		return $query->result_array();
+	}
+
     function save(){
         $name = $this->input->post('names');
         $phone = $this->input->post('phone');
@@ -22,9 +31,9 @@ class Students_model extends CI_Model{
         $nid = $this->input->post('nid');
         $gender = $this->input->post('gender');
         $department = $this->input->post('department');
-        $password = $this->input->post('password');
-        $sql = "INSERT INTO students SET names=?,phone=?,regno=?,nid=?,gender=?,department=?,password=?";
-        $query = $this->db->query($sql,array($name,$phone,$regno,$nid,$gender,$department,base64_encode($password)));
+//        $password = $this->input->post('password');
+        $sql = "INSERT INTO students SET names=?,phone=?,regno=?,nid=?,gender=?,department=?";
+        $query = $this->db->query($sql,array($name,$phone,$regno,$nid,$gender,$department));
         return $this->db->insert_id();
     }
     function get_data(){
@@ -37,6 +46,7 @@ class Students_model extends CI_Model{
                           ->get('students');
         return $query->result_array();
     }
+
 
     function update($id){
         // $id = $this->input->post('id');
