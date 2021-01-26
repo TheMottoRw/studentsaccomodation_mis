@@ -17,6 +17,7 @@ class Api extends CI_Controller
 		if (count($user) == 0) {
 			$feed = array('status' => 'fail', 'message' => 'Wrong username or password', 'user_info' => array());
 		} else $feed = array("status" => "ok", "user_info" => $user[0]);
+
 		$this->output->set_content_type('application/json');
 		$this->output->set_output(json_encode($feed));
 	}
@@ -79,6 +80,12 @@ class Api extends CI_Controller
 		}
 		$this->output->set_content_type('application/json');
 		$this->output->set_output(json_encode($res));
+	}
+	public function rooms(){
+		$res = $this->rooms->get_data();
+		$this->output->set_content_type('application/json');
+		$this->output->set_output(json_encode($res));
+
 	}
 }
 

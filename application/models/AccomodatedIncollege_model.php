@@ -18,6 +18,8 @@ class AccomodatedIncollege_model extends CI_Model{
         
         if(count($studentInfo) == 0) return 'student not exist';
         else $student_id = $studentInfo[0]['id'];
+        return "Exists";
+        exit;
         //get room available
         $totalHost = $this->rooms->getBy('id',$roomid)[0]['host'];
         if($totalHost <= $this->bedReserved($roomid,$academic_year)) {
