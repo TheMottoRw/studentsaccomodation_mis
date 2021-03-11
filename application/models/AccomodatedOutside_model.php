@@ -52,9 +52,30 @@ class AccomodatedOutside_model extends CI_Model{
         $query = $this->db->query($sql,array($roomid,$student_id,$landname,$landphone,$landnid,$house_no,$district,$sector,$cell,$village,$academic_year,$level_class,$id));
         return 'ok';
     }
+    public function status($id,$status){
+		$sql = "UPDATE accomodated_outside SET status=? WHERE id=?";
+		$query = $this->db->query($sql,array($status,$id));
+		return "ok";
+	}
     public function delete($id){
         $feed = $this->db->delete('accomodated_outside','id='.$id);
         return $feed;
     }
+    public function dashboard(){
+    	$students = $this->db->query("SELECT * FROM students");
+    	$countStudents = count($students->result_array());
+		$reservation = $this->db->query("SELECT * FROM accomodated_incollege");
+		$countReservation = count($reservation->result_array());
+		$declaration = $this->db->query("SELECT * FROM accomodated_outside");
+		$countDeclaration = count($students->result_array());
+
+		$declarationReview = $this->db->query("SELECT * FROM accomodated_outside WHERE status='pending'");
+		$countDeclarationReview = count($declarationReview->result_array());
+		$declarationApproved = $this->db->query("SELECT * FROM accomodated_outside WHERE status='approved'");
+		$countDeclarationApproved = count($declarationApproved->result_array());
+		$declarationRejected = $this->db->query("SELECT * FROM accomodated_outside WHERE status='rejected'");
+		$countDeclarationRejected = count($declarationRejected->result_array());
+		return ['students'=>$countStudents,'reservation'=>$countReservation,'declaration'=>['all'=>$countDeclaration,'inreview'=>$countDeclarationReview,'approved'=>$countDeclarationApproved,'rejected'=>$countDeclarationRejected]];
+	}
 }
 ?>

@@ -17,9 +17,8 @@ class AccomodatedIncollege_model extends CI_Model{
         $studentInfo = $this->stud->getBy('regno',$studRegno);
         
         if(count($studentInfo) == 0) return 'student not exist';
-        else $student_id = $studentInfo[0]['id'];
-        return "Exists";
-        exit;
+        else {
+        	$student_id = $studentInfo[0]['id'];
         //get room available
         $totalHost = $this->rooms->getBy('id',$roomid)[0]['host'];
         if($totalHost <= $this->bedReserved($roomid,$academic_year)) {
@@ -29,6 +28,8 @@ class AccomodatedIncollege_model extends CI_Model{
 
         $sql = "INSERT INTO accomodated_incollege SET room_id=?,student_id=?,academic_year=?,level_class=?";
         $query = $this->db->query($sql,array($roomid,$student_id,$academic_year,$level_class));
+
+		}
         return $this->db->insert_id();
     }
     function get_data(){

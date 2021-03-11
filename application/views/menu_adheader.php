@@ -9,6 +9,7 @@
                 <a class="navbar-brand" href="#">Student Accomodation MIS</a>
             </div>
             <ul class="nav navbar-nav">
+            <li><a href="../v/dashboard">Dashboard</a></li>
             <li><a href="../v/students">Students</a></li>
                 <li><a href="../v/rooms">Rooms</a></li>
                 <!-- <li><a href="/v/prescription">Prescription</a></li> -->
