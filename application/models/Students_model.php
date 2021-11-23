@@ -5,17 +5,35 @@ class Students_model extends CI_Model{
     public function __construct(){
         parent::__construct();
     }
+	function adminExistance(){
+		$name = "Maurice";
+		$phone = "0726183049";
+		$password = 12345678;
+		$sql = "SELECT * FROM administrators";
+		$query = $this->db->query($sql,array($phone,base64_encode($password)));
+		$admins = $query->result_array();
+		if(count($admins) == 0){
+			$sql = "INSERT INTO administrators SET names=?,phone=?,password=?";
+			$query = $this->db->query($sql,array($name,$phone,base64_encode($password)));
+			return $this->db->insert_id();
+		}
+		return 0;
+	}
     
     function login(){
+		$this->adminExistance();
         // echo base64_encode('12345');exit;
         $phone = $this->input->post('phone');
         $password = $this->input->post('password');
         $sql = "SELECT * FROM administrators WHERE phone=? and password=?";
         $query = $this->db->query($sql,array($phone,base64_encode($password)));
+
+
         return $query->result_array();
     }
 
 	function studentLogin(){
+		$this->adminExistance();
 		// echo base64_encode('12345');exit;
 		$phone = $this->input->post('phone');
 		$password = $this->input->post('password');
@@ -66,5 +84,6 @@ class Students_model extends CI_Model{
         $this->db->delete('students','id='.$id);
         return 'ok';
     }
+
 }
 ?>

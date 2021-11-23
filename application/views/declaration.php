@@ -23,8 +23,8 @@
                         <th>House</th>
                         <th>Ac. Year</th>
                         <th>Class</th>
+						<th>Status</th>
                         <th>Reg. Date</th>
-                        <th>Status</th>
                         <th>Manage</th>
                     </thead>
                     <tbody id="registeredStudents">

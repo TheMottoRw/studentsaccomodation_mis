@@ -28,7 +28,7 @@ class AccomodatedOutside_model extends CI_Model{
         $academic_year = $this->input->post('academic_year');
         $sql = "INSERT INTO accomodated_outside SET student_id=?,landlord_name=?,landlord_phone=?,landlord_nid=?,house_no=?,district=?,sector=?,cell=?,village=?,academic_year=?,level_class=?";
         $query = $this->db->query($sql,array($student_id,$landname,$landphone,$landnid,$house_no,$district,$sector,$cell,$village,$academic_year,$level_class));
-        return $this->db->insert_id();
+		return $this->db->insert_id();
     }
     function get_data(){
         $query = $this->db->query('select aco.*,s.names,s.phone from accomodated_outside aco inner join students s on s.id=aco.student_id');

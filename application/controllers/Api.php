@@ -44,7 +44,7 @@ class Api extends CI_Controller
 	public function student_declaration($student)
 	{
 		$this->output->set_content_type('application/json');
-		$query = $this->db->query('select aco.*,s.names,s.phone from accomodated_outside aco inner join students s on s.id=aco.student_id WHERE s.id=?', array($student));
+		$query = $this->db->query('select aco.*,s.names,s.phone,s.regno from accomodated_outside aco inner join students s on s.id=aco.student_id WHERE s.id=?', array($student));
 		$data = $query->result_array();
 		$this->output->set_output(json_encode($data));
 	}
@@ -67,17 +67,19 @@ class Api extends CI_Controller
 	{
 		$res = array("status" => 'ok', 'message' => "successful registered", "id" => 0);
 		$feed = $this->outcollege->save();
-		if($feed = "student not exist"){
-			$res['status'] = 'fail';
-			$res['message'] = "Student does not exist";
-		}
-		elseif ($feed != 0) {
+		if(!is_numeric($feed)) {
+			if ($feed = "student not exist") {
+				$res['status'] = 'fail';
+				$res['message'] = "Student does not exist " . $this->input->post('regno');
+			} else {
+				$res['status'] = 'fail';
+				$res['message'] = "Failed to declare accomodation";
+			}
+		}else{
 			$res['message'] = "Accomodation declaration successful registered";
 			$res['id'] = $feed;
-		} else{
-			$res['status'] = 'fail';
-			$res['message'] = "Failed to declare accomodation";
 		}
+//		echo json_encode($res);exit;
 		$this->output->set_content_type('application/json');
 		$this->output->set_output(json_encode($res));
 	}
