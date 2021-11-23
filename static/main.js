@@ -31,8 +31,11 @@ function autoLoad() {
     urlArr.shift();
     urlArr.shift();
     urlArr.shift();
-    console.log(urlArr.join('/'))
-    switch (urlArr.join('/')) {
+    var urlAddress='',urlLen = urlArr.length;
+
+    urlLen == 4?urlAddress =  urlArr[(urlLen-2)]+"/"+urlArr[(urlLen-1)]:urlArr[urlLen-1];
+    console.log(urlAddress);
+    switch (urlAddress) {
         case 'v/':
             loadUser('setContent'); break;
         case 'v/consultation':

@@ -14,7 +14,7 @@
             <div class="col-md-6 jumbotron">
                 <form action="<?= base_url().'index.php/helper/login';?>" method="POST">
                     <h3>Student Accomodation - Login to continue </h3>
-                    <span id="regUserResponse"> </span><br>
+                    <span id="regUserResponse"> <?= $this->session->flashdata("response"); ?> </span><br>
                     <label>Phone</label>
                     <input type='text' name="phone" class='form-control'><br>
                     <label>Password</label>

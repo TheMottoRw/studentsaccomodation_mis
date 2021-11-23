@@ -12,6 +12,8 @@
         <div class="row">
             <div class="col-md-12" >
                 <h3>Declared home <button class='btn btn-primary btn-lg pull-right' data-toggle='modal' data-target='#homeDeclaration'> Make declaration </button></h3>
+
+				<?= $this->session->flashdata("response"); ?>
                 <table class="table table-bordered">
                     <thead>
                         <th>#Count</th>
@@ -21,6 +23,7 @@
                         <th>House</th>
                         <th>Ac. Year</th>
                         <th>Class</th>
+						<th>Status</th>
                         <th>Reg. Date</th>
                         <th>Manage</th>
                     </thead>
@@ -34,9 +37,12 @@
                             <td><?= $dt['house_no'];?></td>
                             <td><?= $dt['academic_year'];?></td>
                             <td><?= $dt['level_class'];?></td>
+							<td><button class="btn btn-sm btn-<?= $dt['status']=='pending'?'default':($dt['status']=='Approved'?'success':'danger');?>" ><?= $dt['status'];?></button></td>
                             <td><?= substr($dt['regdate'],0,10);?></td>
                             <td>
-                                <a href="../outside/delete/<?= $dt['id'];?>" class="btn btn-danger">Delete</a></td>
+								<a href="../outside/status/<?= $dt['id'];?>/Approved" class="btn btn-success">Approve</a><br>
+								<a href="../outside/status/<?= $dt['id'];?>/Rejected" class="btn btn-danger">Reject</a>
+							</td>
                         </tr>
                         <?php  } ?>
                     </tbody>

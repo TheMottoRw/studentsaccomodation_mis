@@ -44,6 +44,7 @@
                     <h3 style='margin-left:15%'>Reserve accomodation</h3>
                     <span id="regUserResponse"></span>
             <div class="col-md-3">
+				<?= $this->session->flashdata("response") ?>
                     <input type="hidden" id="reservationId">
                     <label>Reg no</label>
                     <input type='text' name="regno" id="regno" class='form-control'><br>
@@ -56,6 +57,11 @@
                     <label>Room</label>
                     <select name="room_id"  id='room_id' class='form-control'><br>
                         <option value='default'>Select room</option>
+						<?php foreach($rooms as $k=>$room) {
+							?>
+							<option value="<?= $room['id'];?>"><?= $room['names'];?></option>
+							<?php
+						}?>
                         </select><br>
                     <input type='submit' name="register" style='width:50%;font-size:18px; margin-left:20%' id="btnRegStudents" value='Reserve' class='btn btn-primary'></center>
                 </form>

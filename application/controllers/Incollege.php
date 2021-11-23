@@ -6,8 +6,9 @@ class Incollege extends CI_Controller{
     }
     public function register(){
         $feed = $this->incollege->save();
-        if($feed!=0) header("location:../v/reservation");
-        else echo "Failed to reserve room";
+        if($feed!=0) $this->session->set_flashdata("response","<div class='alert alert-success'>Room reserved successful</div>");
+        else $this->session->set_flashdata("response","<div class='alert alert-danger'>Failed to reserve room</div>");
+		header("location:../v/reservation");
     }
     public function load(){
         $this->output->set_content_type('application/json');
@@ -23,9 +24,11 @@ class Incollege extends CI_Controller{
 
     public function update($id){
         $feed = $this->incollege->update($id);
-        
-        if($feed!=0) header("location:../../v/reservation");
-        else echo "Failed to update room reservation";
+
+		if($feed!=0) $this->session->set_flashdata("response","<div class='alert alert-success'>Room reservation updated successful</div>");
+		else $this->session->set_flashdata("response","<div class='alert alert-danger'>Failed to update room reservation</div>");
+		header("location:../v/reservation");
+
     }
 
     public function delete($id){
