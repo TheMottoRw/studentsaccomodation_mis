@@ -10,8 +10,13 @@ class Outside extends CI_Controller{
 		if($feed=="student not exist") $this->session->set_flashdata("response","<div class='alert alert-danger'>Student not exist</div>");
 		elseif($feed!=0) $this->session->set_flashdata("response","<div class='alert alert-success'>Your accomodation declaration registered successful</div>");
 		else $this->session->set_flashdata("response","<div class='alert alert-danger'>Failed to save declaration of your accomodation</div>");
-		header("location:../v/declaration");
-    }
+		if($_SESSION['category']=='Administrator'){
+			header("location:../v/declaration");
+		}else{
+			header("location:../v/stddeclaration");
+		}
+
+	}
     public function load(){
         $this->output->set_content_type('application/json');
         $data = $this->outside->get_data();

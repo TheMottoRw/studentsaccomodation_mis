@@ -19,7 +19,10 @@
                     <input type='text' name="phone" class='form-control'><br>
                     <label>Password</label>
                     <input type='password' name="password" class='form-control'><br>
-                    <input type='submit' name="register" id="btnLogin" value='Login' class='btn btn-success'><br>
+                    <input type='submit' name="register" id="btnLogin" value='Login' class='btn btn-success'>
+					<a href="signup">Not registered? Register now</a>
+					<br>
+
                 </form>
                 <hr>
             </div>

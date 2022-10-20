@@ -31,7 +31,12 @@ class AccomodatedOutside_model extends CI_Model{
 		return $this->db->insert_id();
     }
     function get_data(){
-        $query = $this->db->query('select aco.*,s.names,s.phone from accomodated_outside aco inner join students s on s.id=aco.student_id');
+				if ($_SESSION['category'] == 'Student') {
+					$query = $this->db->query('select aco.*,s.names,s.phone from accomodated_outside aco inner join students s on s.id=aco.student_id WHERE aco.student_id="'.$_SESSION['userid'].'"');
+				}else{
+
+					$query = $this->db->query('select aco.*,s.names,s.phone from accomodated_outside aco inner join students s on s.id=aco.student_id');
+				}
         return $query->result_array();
     }
 

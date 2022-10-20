@@ -11,19 +11,30 @@ class Helper extends CI_Controller{
         $logData = $this->student->login();
         if(count($logData) == 1){
             $this->session->set_userdata(array(
-                'userid'=>1,
+                'userid'=>$logData[0]['id'],
                 'category'=>'Administrator',
+				'names'=>$logData[0]['names'],
             ));
             header("location:../v/students");
         } else {
-        	$this->session->set_flashdata("response","<div class='alert alert-danger'>Wrong username or password</div>");
-			header("location:".$_SERVER['HTTP_REFERER']);
-        }
+			$logData = $this->student->studentLogin();
+			if (count($logData) == 1) {
+				$this->session->set_userdata(array(
+					'userid' => $logData[0]['id'],
+					'category' => 'Student',
+					'names' => $logData[0]['names'],
+				));
+				header("location:../v/stdreservation");
+			} else {
+				$this->session->set_flashdata("response", "<div class='alert alert-danger'>Wrong username or password</div>");
+				header("location:" . $_SERVER['HTTP_REFERER']);
+			}
+		}
     }
 
     public function logout(){
         session_destroy();
-        header("location:../v");
+        header("location:".base_url()."index.php/v");
     }
     public function adminExistance(){
 
